@@ -1,0 +1,47 @@
+type: install
+id: site-archiving-toolkit
+version: '1.0'
+appVersion: latest
+name: Site Archiving toolkit
+logo: https://reclaimcloud-reclm.cdn.jelastic.net/wp-content/uploads/2020/06/cropped-Reclaim-Cloud-Logo-New.png
+homepage: https://github.com/taylorjadin/site-archiving-toolkit
+categories: 
+- apps/education
+description: 
+  text: "Archive and flatten sites using HTTTrack and Browsertrix Crawler."
+  short: "Archive and flatten websites."
+
+globals:
+  shortname: site-archiving-toolkit
+  path: /root/site-archiving-toolkit
+  repo: https://github.com/taylorjadin/site-archiving-toolkit
+
+nodes:
+  nodeType: dockerengine
+  nodeGroup: cp
+  cloudlets: 32
+  fixedcloudlets: 1
+  extip: false
+  displayName: AppServer
+  volumes: ["${globals.path}"]
+ssl: true
+
+onInstall:
+  - setup
+
+actions:
+  setup:      
+    - cmd[cp]: |-
+        mkdir -p ${globals.path}
+        cd ${globals.path}
+        git clone ${globals.repo} --depth 1 .
+        rm *.ps1
+        bash start-server.sh
+    - env.file.AddFavorite:
+        nodeGroup: cp
+        path: ${globals.path}
+        keyword: ${globals.shortname}
+
+success: | 
+  **${env.displayName}**: [https://${env.domain}/](https://${env.domain}/)
+  - If you want to map a custom domain, point an A record at **${nodes.cp.extIPs}** then use the **Domain Configuration** Add-On to change the domain name and issue a new Let's Encrypt cert.
