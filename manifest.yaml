@@ -9,7 +9,7 @@ categories:
 - apps/education
 description: 
   text: "Archive and flatten sites using HTTTrack and Browsertrix Crawler."
-  short: "Archive and flatten websites."
+  short: "Archive and flatten sites using HTTTrack and Browsertrix Crawler."
 
 globals:
   shortname: site-archiving-toolkit
@@ -32,6 +32,8 @@ onInstall:
 actions:
   setup:      
     - cmd[cp]: |-
+        # Run updates
+        yum update -y
         # Get stuff ready
         mkdir -p ${globals.path}
         cd ${globals.path}
