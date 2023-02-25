@@ -2,8 +2,8 @@ type: install
 id: site-archiving-toolkit
 version: '1.0'
 appVersion: latest
-name: Site Archiving toolkit
-logo: https://reclaimcloud-reclm.cdn.jelastic.net/wp-content/uploads/2020/06/cropped-Reclaim-Cloud-Logo-New.png
+name: Site Archiving Toolkit
+logo: https://raw.githubusercontent.com/TaylorJadin/site-archiving-toolkit-jps/main/file-download-solid.png
 homepage: https://github.com/taylorjadin/site-archiving-toolkit
 categories: 
 - apps/education
