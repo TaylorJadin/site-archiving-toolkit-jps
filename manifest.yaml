@@ -20,7 +20,7 @@ nodes:
   nodeType: dockerengine
   nodeGroup: cp
   cloudlets: 32
-  fixedcloudlets: 1
+  fixedcloudlets: 2
   extip: false
   displayName: AppServer
   volumes: ["${globals.path}"]
@@ -32,10 +32,14 @@ onInstall:
 actions:
   setup:      
     - cmd[cp]: |-
+        # Get stuff ready
         mkdir -p ${globals.path}
         cd ${globals.path}
         git clone ${globals.repo} --depth 1 .
         rm *.ps1
+        # Pre-build the container for super fast first run
+        docker build -f resources/Dockerfile . -t archive-toolkit
+        # Start the web server
         bash start-server.sh
     - env.file.AddFavorite:
         nodeGroup: cp
@@ -44,4 +48,3 @@ actions:
 
 success: | 
   **${env.displayName}**: [https://${env.domain}/](https://${env.domain}/)
-  - If you want to map a custom domain, point an A record at **${nodes.cp.extIPs}** then use the **Domain Configuration** Add-On to change the domain name and issue a new Let's Encrypt cert.
