@@ -47,8 +47,8 @@ actions:
         bash start-server.sh
     - env.file.AddFavorite:
         nodeGroup: cp
-        path: ${globals.path}
-        keyword: ${globals.shortname}
+        path: ${globals.path}/crawls
+        keyword: crawls
 
 success: | 
   **${env.displayName}**: [https://${env.domain}/](https://${env.domain}/)
