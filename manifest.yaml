@@ -41,7 +41,6 @@ actions:
         cd ${globals.path}
         git clone ${globals.repo} --depth 1 .
         rm *.ps1
-        rm -rf releases/
         rm make-releases.sh
         chmod +x *.sh
         # Add handy aliases to .bashrc
