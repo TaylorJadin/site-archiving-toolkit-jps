@@ -34,6 +34,8 @@ actions:
     - cmd[cp]: |-
         # Run updates
         yum update -y
+        # Install htop
+        yum install htop -y
         # Get stuff ready
         mkdir -p ${globals.path}
         cd ${globals.path}
