@@ -42,8 +42,6 @@ actions:
         git clone ${globals.repo} --depth 1 .
         rm *.ps1
         rm make-releases.sh
-        rm stop-server.sh
-        rm start-server.sh
         chmod +x *.sh
         # Add handy aliases to .bashrc
         curl https://raw.githubusercontent.com/TaylorJadin/site-archiving-toolkit-jps/main/bash_aliases >> /root/.bashrc
