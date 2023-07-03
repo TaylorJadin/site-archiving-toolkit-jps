@@ -1,15 +1,15 @@
 type: install
-id: site-archiving-toolkit
+id: site-archiving-toolkit-umwblogs
 version: '1.0'
 appVersion: latest
-name: Site Archiving Toolkit
+name: UMWBlogs Site Archiving Toolkit
 logo: https://raw.githubusercontent.com/TaylorJadin/site-archiving-toolkit-jps/main/file-download-solid.png
 homepage: https://github.com/taylorjadin/site-archiving-toolkit
 categories: 
 - apps/education
 description: 
-  text: "Archive and flatten sites using HTTTrack and Browsertrix Crawler."
-  short: "Archive and flatten sites using HTTTrack and Browsertrix Crawler."
+  text: "Archive and flatten sites using Browsertrix Crawler for UMWBlogs."
+  short: "Archive and flatten sites using Browsertrix Crawler for UMWBlogs."
 
 globals:
   shortname: site-archiving-toolkit
@@ -39,9 +39,7 @@ actions:
         # Get stuff ready
         mkdir -p ${globals.path}
         cd ${globals.path}
-        git clone ${globals.repo} --depth 1 .
-        rm *.ps1
-        rm make-releases.sh
+        git clone -b umwblogs ${globals.repo} --depth 1 .
         chmod +x *.sh
         # Add handy aliases to .bashrc
         curl https://raw.githubusercontent.com/TaylorJadin/site-archiving-toolkit-jps/main/bash_aliases >> /root/.bashrc
