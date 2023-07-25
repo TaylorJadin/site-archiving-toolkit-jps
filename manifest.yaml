@@ -55,4 +55,5 @@ actions:
         keyword: crawls
 
 success: | 
-  **${env.displayName}**: [https://${env.domain}/](https://${env.domain}/)
+  - **${env.displayName}**: [https://${env.domain}/](https://${env.domain}/)
+  - For more information, check out the GitHub repo for the project: [https://github.com/TaylorJadin/site-archiving-toolkit](https://github.com/TaylorJadin/site-archiving-toolkit)
