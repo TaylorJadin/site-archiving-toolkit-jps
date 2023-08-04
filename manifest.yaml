@@ -23,6 +23,7 @@ nodes:
   fixedcloudlets: 1
   extip: false
   displayName: AppServer
+  addons: [update-toolkit]
   volumes: ["${globals.path}"]
 ssl: true
 
@@ -53,6 +54,34 @@ actions:
         nodeGroup: cp
         path: ${globals.path}/crawls
         keyword: crawls
+addons:
+  - id: update-toolkit
+    name: Update Site Archiving Toolkit
+    description: Pull the latest version of the Site Archiving Toolkit from Github. This will not delete any crawls that have already completed.
+    permanent: true
+    buttons:
+      - confirmText: Are you sure you want to proceed?
+        loadingText: Updating Site Archiving Toolkit...
+        action: pullUpdates
+        caption: Update
+        successText: Your Site Archiving Toolkit has been updated!
+        title: Update Ghost
+    actions:
+      pullUpdates:
+        -  cmd[cp]: |-
+            cd /root/site-archiving-toolkit
+            bash quit-crawlers.sh
+            bash stop-server.sh
+            docker system prune
+            yum update -y
+            git reset --hard HEAD
+            git pull
+            rm *.ps1
+            rm make-releases.sh
+            chmod +x *.sh
+            docker build -f resources/Dockerfile.webrecorder . -t site-archiving-toolkit-webrecorder
+            docker build -f resources/Dockerfile.httrack . -t site-archiving-toolkit-httrack 
+            bash start-server.sh
 
 success: | 
   - **${env.displayName}**: [https://${env.domain}/](https://${env.domain}/)
