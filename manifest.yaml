@@ -57,7 +57,7 @@ actions:
 addons:
   - id: update-toolkit
     name: Update Site Archiving Toolkit
-    description: Pull the latest version of the Site Archiving Toolkit from Github. This will not delete any crawls that have already completed.
+    description: Pull the latest version of the Site Archiving Toolkit from Github. This will not delete completed crawls.
     permanent: true
     buttons:
       - confirmText: Are you sure you want to proceed?
@@ -76,8 +76,8 @@ addons:
             yum update -y
             git reset --hard HEAD
             git pull
-            rm *.ps1
-            rm make-releases.sh
+            rm -f *.ps1
+            rm -f make-releases.sh
             chmod +x *.sh
             docker build -f resources/Dockerfile.webrecorder . -t site-archiving-toolkit-webrecorder
             docker build -f resources/Dockerfile.httrack . -t site-archiving-toolkit-httrack 
