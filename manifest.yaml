@@ -47,7 +47,8 @@ actions:
         # Add handy aliases to .bashrc
         curl https://raw.githubusercontent.com/TaylorJadin/site-archiving-toolkit-jps/main/bash_aliases >> /root/.bashrc
         # Pre-build the container for super fast first run
-        docker build -f resources/Dockerfile . -t archive-toolkit
+        docker build -f resources/Dockerfile.webrecorder . -t site-archiving-toolkit-webrecorder
+        docker build -f resources/Dockerfile.httrack . -t site-archiving-toolkit-httrack 
         # Start the web server
         bash start-server.sh
     - env.file.AddFavorite:
