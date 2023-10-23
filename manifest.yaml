@@ -70,11 +70,11 @@ addons:
     actions:
       pullUpdates:
         -  cmd[cp]: |-
+            yum update -y
             cd /root/site-archiving-toolkit
             bash quit-crawlers.sh
             bash stop-server.sh
             docker system prune
-            yum update -y
             git reset --hard HEAD
             git pull
             rm -f *.ps1
